@@ -47,6 +47,7 @@
       defaultMax: 9,
     }
   };
+  console.log(settings);
 
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
@@ -67,7 +68,7 @@
 
       //   console.log('new Product:', thisProduct);
       //   console.log('thisProduct.element', thisProduct.element);
-        // console.log('thisProduct.data', thisProduct.data);
+      // console.log('thisProduct.data', thisProduct.data);
     }
 
     renderInMenu() {
@@ -111,18 +112,18 @@
       const thisProduct = this;
       // console.log('initOrderForm', thisProduct.initOrderForm);
 
-      thisProduct.form.addEventListener('submit', function(event){
+      thisProduct.form.addEventListener('submit', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
       });
 
-      for(let input of thisProduct.formInputs){
-        input.addEventListener('change', function(){
+      for (let input of thisProduct.formInputs) {
+        input.addEventListener('change', function () {
           thisProduct.processOrder();
         });
       }
 
-      thisProduct.cartButton.addEventListener('click', function(event){
+      thisProduct.cartButton.addEventListener('click', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
       });
@@ -137,24 +138,31 @@
 
       let price = thisProduct.data.price;
 
-      for(let paramId in thisProduct.data.params){
+      for (let paramId in thisProduct.data.params) {
         const param = thisProduct.data.params[paramId];
         console.log('paramId, param', paramId, param);
 
-        for(let optionId in param.options){
+        for (let optionId in param.options) {
           const option = param.options[optionId];
           console.log('optionId, option', optionId, option);
-
-          if (formData[paramId] && formData[paramId].includes(optionId)){
-            if(!option.default) {
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+          if (optionSelected) {
+            if (!option.default) {
               price = price + option.price;
             }
           } else {
-            if(option.default){
+            if (option.default) {
               price = price - option.price;
             }
           }
-
+          const optionImage = thisProduct.element.querySelector('.' + paramId + '-' + optionId);
+          if (optionImage) {
+            if (optionSelected) {
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
+            } else if (!optionSelected) {
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
         }
       }
       thisProduct.priceElem.innerHTML = price;
