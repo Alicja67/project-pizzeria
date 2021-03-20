@@ -70,7 +70,7 @@
     amountWidget: {
       defaultValue: 1,
       defaultMin: 1,
-      defaultMax: 9,
+      defaultMax: 10,
     }, // CODE CHANGED
     // CODE ADDED START
     cart: {
@@ -129,7 +129,7 @@
       //   console.log('thisProduct.formInputs', thisProduct.formInputs);
       //   console.log('thisProduct.cartButton', thisProduct.cartButton);
       //   console.log('thisProduct.priceElem', thisProduct.priceElem);
-      console.log('thisProduct.amountWidgetElem', thisProduct.amountWidgetElem);
+      // console.log('thisProduct.amountWidgetElem', thisProduct.amountWidgetElem);
     }
 
     initAccordion() {
@@ -225,9 +225,9 @@
       thisWidget.setValue(settings.amountWidget.defaultValue);
       thisWidget.initActions();
 
-      console.log('AmountWidget', AmountWidget);
-      console.log('constructor arguments:', element);
-      console.log('thisWidget.initAction', thisWidget.initActions);
+      // console.log('AmountWidget', AmountWidget);
+      // console.log('constructor arguments:', element);
+      // console.log('thisWidget.initAction', thisWidget.initActions);
     }
 
     getElements(element) {
@@ -243,17 +243,17 @@
       const thisWidget = this;
 
       const newValue = parseInt(value);
-      console.log('newValue', newValue);
+      // console.log('newValue', newValue);
       thisWidget.value = settings.amountWidget.defaultValue;
 
       /* TODO: Add validation */
       // if (thisWidget.value !== newValue && !isNaN(newValue)) {
       if ((thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax)){
         thisWidget.value = newValue;
-        console.log('thisWidget.value', thisWidget.value);
+        // console.log('thisWidget.value', thisWidget.value);
       }
       thisWidget.input.value = thisWidget.value;
-      console.log('thisWidget.input.value', thisWidget.input.value);
+      // console.log('thisWidget.input.value', thisWidget.input.value);
       thisWidget.annouce();
     }
 
@@ -283,8 +283,40 @@
     }
   }
 
+  class Cart {
+    constructor(element) {
+      const thisCart = this;
+
+      thisCart.products = [];
+      thisCart.getElements(element);
+      thisCart.initActions();
+      console.log('new Cart', thisCart);
+    }
+
+    getElements(element) {
+      const thisCart = this;
+
+      thisCart.dom = {
+      };
+      thisCart.dom.wrapper = element;
+      thisCart.dom.toggleTrigger = element.querySelector(select.cart.toggleTrigger);
+      console.log('thisCart.dom.toggleTrigger', thisCart.dom.toggleTrigger);
+      console.log('thisCart.dom', thisCart.dom);
+    }
+
+    initActions() {
+      const thisCart = this;
+
+      thisCart.dom.toggleTrigger.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+      });
+    }
+  }
+
   const app = {
-    initMenu: function () {
+    initMenu: function() {
       const thisApp = this;
 
       // console.log('thisApp.data:', thisApp.data);
@@ -295,13 +327,21 @@
       }
     },
 
-    initData: function () {
+    initData: function() {
       const thisApp = this;
 
       thisApp.data = dataSource;
     },
 
-    init: function () {
+    initCart: function() {
+      const thisApp = this;
+
+      const cartElem = document.querySelector(select.containerOf.cart);
+      thisApp.cart = new Cart(cartElem);
+      console.log('cartElem', cartElem);
+    },
+
+    init: function() {
       const thisApp = this;
       // console.log('*** App starting ***');
       // console.log('thisApp:', thisApp);
@@ -311,6 +351,7 @@
 
       thisApp.initData();
       thisApp.initMenu();
+      thisApp.initCart();
     },
   };
 
