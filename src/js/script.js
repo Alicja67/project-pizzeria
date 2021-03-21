@@ -114,6 +114,7 @@
       const menuContainer = document.querySelector(select.containerOf.menu);
       // console.log('menuContainer', menuContainer);
       menuContainer.appendChild(thisProduct.element);
+      // console.log('thisProduct.element', thisProduct.element);
     }
 
     getElements() {
@@ -215,8 +216,8 @@
           }
         }
       }
-      price *= thisProduct.amountWidget.value;
       thisProduct.priceSingle = price;
+      price *= thisProduct.amountWidget.value;
       thisProduct.priceElem.innerHTML = price;
     }
 
@@ -228,12 +229,13 @@
         name: thisProduct.data.name,
         amount: thisProduct.amountWidget.value,
         priceSingle: thisProduct.priceSingle,
-        price: thisProduct.amountWidget.value * thisProduct.priceSingle,
-        params: {}
+        price: parseInt(thisProduct.priceElem.innerHTML),
+        params: thisProduct.prepareCartProductParams(),
       };
-      productSummary.params = thisProduct.prepareCartProductParams();
+
       console.log('productSummary', productSummary);
-      return;
+
+      return productSummary;
     }
 
     prepareCartProductParams() {
@@ -248,7 +250,7 @@
         // console.log('param', param);
 
         params[paramId] = {
-          name: param.label,
+          label: param.label,
           options: {}
         };
 
@@ -267,11 +269,11 @@
       }
       return params;
     }
-    
+
     addToCart() {
       const thisProduct = this;
 
-      app.cart.add(thisProduct.prepareCartProduct);
+      app.cart.add(thisProduct.prepareCartProduct());
     }
   }
 
@@ -357,8 +359,10 @@
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = element.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = element.querySelector(select.cart.productList);
       console.log('thisCart.dom.toggleTrigger', thisCart.dom.toggleTrigger);
       console.log('thisCart.dom', thisCart.dom);
+      console.log('thisCart.dom.productList', thisCart.dom.productList);
     }
 
     initActions() {
@@ -372,9 +376,21 @@
     }
 
     add(menuProduct) {
-      //const thisCart = this;
+      const thisCart = this;
 
       console.log('menuProduct', menuProduct);
+
+      const generatedHTML = templates.cartProduct(menuProduct);
+      console.log('generatedHTML', generatedHTML);
+
+      thisCart.element = utils.createDOMFromHTML(generatedHTML);
+
+      const cartContainer = thisCart.dom.productList;
+      cartContainer.appendChild(thisCart.element);
+
+      console.log('thisCart.element', thisCart.element);
+      console.log('menuContainer', cartContainer);
+
     }
   }
 
