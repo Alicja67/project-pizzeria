@@ -78,7 +78,7 @@
     },
     // CODE ADDED END
   };
-  console.log(settings);
+  // console.log(settings);
 
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
@@ -163,6 +163,8 @@
       thisProduct.cartButton.addEventListener('click', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
+        thisProduct.addToCart();
+        thisProduct.prepareCartProduct();
       });
     }
 
@@ -171,7 +173,7 @@
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
       // console.log('thisProduct.amountWidget', thisProduct.amountWidget);
-      thisProduct.amountWidgetElem.addEventListener('updated', function(){
+      thisProduct.amountWidgetElem.addEventListener('updated', function () {
         thisProduct.processOrder();
       });
     }
@@ -186,6 +188,7 @@
       let price = thisProduct.data.price;
 
       for (let paramId in thisProduct.data.params) {
+        // debugger;
         const param = thisProduct.data.params[paramId];
         // console.log('paramId, param', paramId, param);
 
@@ -213,7 +216,62 @@
         }
       }
       price *= thisProduct.amountWidget.value;
+      thisProduct.priceSingle = price;
       thisProduct.priceElem.innerHTML = price;
+    }
+
+    prepareCartProduct() {
+      const thisProduct = this;
+
+      const productSummary = {
+        id: thisProduct.id,
+        name: thisProduct.data.name,
+        amount: thisProduct.amountWidget.value,
+        priceSingle: thisProduct.priceSingle,
+        price: thisProduct.amountWidget.value * thisProduct.priceSingle,
+        params: {}
+      };
+      productSummary.params = thisProduct.prepareCartProductParams();
+      console.log('productSummary', productSummary);
+      return;
+    }
+
+    prepareCartProductParams() {
+      const thisProduct = this;
+
+      const formData = utils.serializeFormToObject(thisProduct.form);
+
+      const params = {};
+
+      for (let paramId in thisProduct.data.params) {
+        const param = thisProduct.data.params[paramId];
+        // console.log('param', param);
+
+        params[paramId] = {
+          name: param.label,
+          options: {}
+        };
+
+        for (let optionId in param.options) {
+          // console.log('optionIn', optionId);
+          // console.log('param.options', param.options);
+          const option = param.options[optionId];
+          // console.log('option', option);
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+
+          if (optionSelected) {
+            params[paramId].options[optionId] = option.label;
+            // console.log('option.label', option.label);
+          }
+        }
+      }
+      return params;
+    }
+    
+    addToCart() {
+      const thisProduct = this;
+
+      app.cart.add(thisProduct.prepareCartProduct);
     }
   }
 
@@ -248,7 +306,7 @@
 
       /* TODO: Add validation */
       // if (thisWidget.value !== newValue && !isNaN(newValue)) {
-      if ((thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax)){
+      if ((thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax)) {
         thisWidget.value = newValue;
         // console.log('thisWidget.value', thisWidget.value);
       }
@@ -260,22 +318,22 @@
     initActions() {
       const thisWidget = this;
 
-      thisWidget.input.addEventListener('change', function (){
+      thisWidget.input.addEventListener('change', function () {
         thisWidget.setValue(thisWidget.input.value);
       });
 
-      thisWidget.linkDecrease.addEventListener('click', function(event){
+      thisWidget.linkDecrease.addEventListener('click', function (event) {
         event.preventDefault();
         thisWidget.setValue(--thisWidget.value);
       });
 
-      thisWidget.linkIncrease.addEventListener('click', function(event){
+      thisWidget.linkIncrease.addEventListener('click', function (event) {
         event.preventDefault();
         thisWidget.setValue(++thisWidget.value);
       });
     }
 
-    annouce(){
+    annouce() {
       const thisWidget = this;
 
       const event = new Event('updated');
@@ -296,8 +354,7 @@
     getElements(element) {
       const thisCart = this;
 
-      thisCart.dom = {
-      };
+      thisCart.dom = {};
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = element.querySelector(select.cart.toggleTrigger);
       console.log('thisCart.dom.toggleTrigger', thisCart.dom.toggleTrigger);
@@ -307,16 +364,22 @@
     initActions() {
       const thisCart = this;
 
-      thisCart.dom.toggleTrigger.addEventListener('click', function(event) {
+      thisCart.dom.toggleTrigger.addEventListener('click', function (event) {
         event.preventDefault();
 
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       });
     }
+
+    add(menuProduct) {
+      //const thisCart = this;
+
+      console.log('menuProduct', menuProduct);
+    }
   }
 
   const app = {
-    initMenu: function() {
+    initMenu: function () {
       const thisApp = this;
 
       // console.log('thisApp.data:', thisApp.data);
@@ -327,13 +390,13 @@
       }
     },
 
-    initData: function() {
+    initData: function () {
       const thisApp = this;
 
       thisApp.data = dataSource;
     },
 
-    initCart: function() {
+    initCart: function () {
       const thisApp = this;
 
       const cartElem = document.querySelector(select.containerOf.cart);
@@ -341,7 +404,7 @@
       console.log('cartElem', cartElem);
     },
 
-    init: function() {
+    init: function () {
       const thisApp = this;
       // console.log('*** App starting ***');
       // console.log('thisApp:', thisApp);
