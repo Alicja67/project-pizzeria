@@ -286,7 +286,8 @@
       const thisWidget = this;
 
       thisWidget.getElements(element);
-      thisWidget.setValue(settings.amountWidget.defaultValue);
+      thisWidget.value = settings.amountWidget.defaultValue;
+      thisWidget.setValue(thisWidget.input.value);
       thisWidget.initActions();
 
       // console.log('AmountWidget', AmountWidget);
@@ -308,7 +309,6 @@
 
       const newValue = parseInt(value);
       // console.log('newValue', newValue);
-      thisWidget.value = settings.amountWidget.defaultValue;
 
       /* TODO: Add validation */
       // if (thisWidget.value !== newValue && !isNaN(newValue)) {
@@ -330,12 +330,12 @@
 
       thisWidget.linkDecrease.addEventListener('click', function (event) {
         event.preventDefault();
-        thisWidget.setValue(--thisWidget.value);
+        thisWidget.setValue(thisWidget.value-1);
       });
 
       thisWidget.linkIncrease.addEventListener('click', function (event) {
         event.preventDefault();
-        thisWidget.setValue(++thisWidget.value);
+        thisWidget.setValue(thisWidget.value+1);
       });
     }
 
