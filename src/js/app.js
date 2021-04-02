@@ -44,9 +44,9 @@ const app = {
   initCart: function () {
     const thisApp = this;
 
-    const cartElem = document.querySelector(select.containerOf.menu);
+    const cartElem = document.querySelector(select.containerOf.cart);
     thisApp.cart = new Cart(cartElem);
-    // console.log('cartElem', cartElem);
+    console.log('cartElem', cartElem);
 
     thisApp.productList = document.querySelector(select.containerOf.menu);
 

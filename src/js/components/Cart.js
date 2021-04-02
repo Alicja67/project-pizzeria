@@ -1,6 +1,6 @@
 import {select, classNames, templates, settings} from '../settings.js';
 import utils from '../utils.js';
-import CartProduct from '../components/CartProduct';
+import CartProduct from './CartProduct.js';
 
 class Cart {
   constructor(element) {
@@ -19,6 +19,7 @@ class Cart {
 
     thisCart.dom = {};
     thisCart.dom.wrapper = element;
+    console.log('element', element);
     thisCart.dom.toggleTrigger = element.querySelector(select.cart.toggleTrigger);
     thisCart.dom.productList = element.querySelector(select.cart.productList);
     thisCart.dom.deliveryFee = element.querySelector(select.cart.deliveryFee);
