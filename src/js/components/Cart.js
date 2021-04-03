@@ -19,7 +19,6 @@ class Cart {
 
     thisCart.dom = {};
     thisCart.dom.wrapper = element;
-    console.log('element', element);
     thisCart.dom.toggleTrigger = element.querySelector(select.cart.toggleTrigger);
     thisCart.dom.productList = element.querySelector(select.cart.productList);
     thisCart.dom.deliveryFee = element.querySelector(select.cart.deliveryFee);
@@ -29,10 +28,6 @@ class Cart {
     thisCart.dom.form = element.querySelector(select.cart.form);
     thisCart.dom.address = thisCart.dom.form.querySelector(select.cart.address);
     thisCart.dom.phone = thisCart.dom.form.querySelector(select.cart.phone);
-    console.log('thisCart.dom.totalPrice', thisCart.dom.totalPrice);
-    console.log('thisCart.dom.totalNumber', thisCart.dom.totalNumber);
-    console.log('thisCart.dom.phone', thisCart.dom.phone);
-    console.log('thisCart.dom.address', thisCart.dom.address);
   }
 
   initActions() {
@@ -85,7 +80,7 @@ class Cart {
     const thisCart = this;
 
     thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
-    console.log('deliveryFee', thisCart.deliveryFee);
+    // console.log('deliveryFee', thisCart.deliveryFee);
 
     thisCart.totalNumber = 0;
     thisCart.subtotalPrice = 0;
@@ -100,9 +95,9 @@ class Cart {
       thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
     }
 
-    console.log('totalPrice', thisCart.totalPrice);
-    console.log('totalNumber', thisCart.totalNumber);
-    console.log('subtotalPrice', thisCart.subtotalPrice);
+    // console.log('totalPrice', thisCart.totalPrice);
+    // console.log('totalNumber', thisCart.totalNumber);
+    // console.log('subtotalPrice', thisCart.subtotalPrice);
 
     thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
     thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
@@ -139,7 +134,7 @@ class Cart {
       deliveryFee: thisCart.deliveryFee,
       products: [],
     };
-    console.log('payload', payload);
+    // console.log('payload', payload);
 
     for(let prod of thisCart.products) {
       payload.products.push(prod.getData());
@@ -153,7 +148,7 @@ class Cart {
       },
       body: jsonString
     };
-    console.log('jsonString', jsonString);
+    // console.log('jsonString', jsonString);
 
     fetch(url, options);
   }

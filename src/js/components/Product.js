@@ -182,7 +182,7 @@ class Product {
         }
       }
     }
-    console.log('params', params);
+    // console.log('params', params);
     return params;
   }
 
