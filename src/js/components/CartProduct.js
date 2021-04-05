@@ -25,11 +25,11 @@ class CartProduct {
 
     thisCartProduct.dom = {};
     thisCartProduct.dom.wrapper = element;
-    console.log('element', element);
+    // console.log('element', element);
     thisCartProduct.dom.price = element.querySelector(select.cartProduct.price);
     thisCartProduct.dom.amountWidget = element.querySelector(select.cartProduct.amountWidget);
-    console.log('thisCartProduct.dom.amountWidget', thisCartProduct.dom.amountWidget);
-    console.log('select.cartProduct.amountWidget', select.cartProduct.amountWidget);
+    // console.log('thisCartProduct.dom.amountWidget', thisCartProduct.dom.amountWidget);
+    // console.log('select.cartProduct.amountWidget', select.cartProduct.amountWidget);
     thisCartProduct.dom.edit = element.querySelector(select.cartProduct.edit);
     thisCartProduct.dom.remove = element.querySelector(select.cartProduct.remove);
   }

@@ -23,8 +23,8 @@ class BaseWidget{
       thisWidget.correctValue = newValue;
       thisWidget.annouce();
     }
-
     thisWidget.renderValue();
+
   }
 
   setValue(value){
@@ -45,6 +45,7 @@ class BaseWidget{
     const thisWidget = this;
 
     thisWidget.dom.wrapper.innerHTML = thisWidget.value;
+    console.log('thisWidget.value', thisWidget.value);
   }
 
   annouce() {
