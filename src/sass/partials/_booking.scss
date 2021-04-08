@@ -1,9 +1,9 @@
 #pages {
-  > * {
+  >* {
     display: none;
   }
 
-  > .active {
+  >.active {
     display: block;
   }
 }
@@ -29,7 +29,7 @@
   display: block;
   margin: 0 0 ($base-size * 2) 0;
 
-  > .widget-amount {
+  >.widget-amount {
     margin: ($base-size * 2) 0 0 0;
   }
 
@@ -106,7 +106,7 @@
   background-size: ($base-size * 3);
   background-repeat: repeat;
 
-  > * {
+  >* {
     position: absolute;
     text-align: center;
     vertical-align: center;
@@ -115,7 +115,7 @@
   .object {
     @extend .h3;
     background: #f7f1e3;
-    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
   }
 
   .entry {
@@ -172,6 +172,11 @@
         opacity: 0.4;
       }
 
+    }
+
+    &.selected {
+      color: lighten($color-dark, 70%);
+      background: rgb(70, 119, 70);
     }
   }
 
