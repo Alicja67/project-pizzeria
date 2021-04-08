@@ -11,7 +11,7 @@ class Cart {
     thisCart.initActions();
     thisCart.update();
     // console.log('new Cart', thisCart);
-    // console.log('element', element);
+    // console.log('products', thisCart.products);
   }
 
   getElements(element) {
@@ -28,6 +28,7 @@ class Cart {
     thisCart.dom.form = element.querySelector(select.cart.form);
     thisCart.dom.address = thisCart.dom.form.querySelector(select.cart.address);
     thisCart.dom.phone = thisCart.dom.form.querySelector(select.cart.phone);
+
   }
 
   initActions() {
@@ -73,6 +74,8 @@ class Cart {
     // thisCart.products.push(menuProduct);
     thisCart.products.push(new CartProduct(menuProduct, thisCart.element));
     // console.log('thisCart.products', thisCart.products);
+    console.log('products', thisCart.products);
+
     thisCart.update();
   }
 
@@ -139,6 +142,9 @@ class Cart {
     for(let prod of thisCart.products) {
       payload.products.push(prod.getData());
     }
+    console.log('products', thisCart.products);
+
+
     const jsonString = JSON.stringify(payload);
 
     const options = {
