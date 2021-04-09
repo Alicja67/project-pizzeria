@@ -21,6 +21,7 @@
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
         </div>
         <div class="main-nav">
+          <a href="#home">Home</a>
           <a href="#order">Order</a>
           <a href="#booking">Booking</a>
         </div>
@@ -62,6 +63,9 @@
   </header>
 
   <div id="pages">
+    <section id="home">
+      <div class="home-wrapper container"></div>
+    </section>
     <section id="order">
       <div id="product-list" class="product-list container"></div>
     </section>
@@ -69,6 +73,112 @@
       <div class="booking-wrapper container"></div>
     </section>
   </div>
+
+  <script id="template-home-widget" type="text/x-handlebars-template">
+    <div class="home-widget">
+      <div class="boxes-wrapper">
+        <div class="box-left box top">
+          <!-- <img src="images/home/pizza-1.jpg"> -->
+          <a href="#/order"><h1 class="box-title">Order online</h1></a>
+        </div>
+        <div class="box-right box top">
+          <!-- <img src="images/home/pizza-2.jpg"> -->
+          <h1 class="box-title">Book a table</h1>
+        </div>
+        <div class="box-bottom box bottom">
+          <div>
+            <h1 class="box-title">Opening hours:</h1>
+            <h2 class="box-subtitle">tue-sun, 12PM - 12AM</h2>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel-item">
+          <div class="carousel-info">
+            <h3 class="carousel-title">Amazing service!</h3>
+            <p class="carousel-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+            <i>-Margaret Osborne</i>
+          </div>
+          <div class="carousel-photo">
+            <img src="images/home/pizza-3.jpg">
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-info">
+            <h3 class="carousel-title">Delicious food!</h3>
+            <p class="carousel-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+            <i>-Patrick Marat</i>
+          </div>
+          <div class="carousel-photo">
+            <img src="images/home/pizza-3.jpg">
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-info">
+            <h3 class="carousel-title">Good snacks!</h3>
+            <p class="carousel-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+            <i>-Olivier Path</i>
+          </div>
+          <div class="carousel-photo">
+            <img src="images/home/pizza-3.jpg">
+          </div>
+        </div>
+      </div>
+      <div class="gallery">
+        <div class="gallery-box box">
+          <img src="images/home/pizza-4.jpg">
+          <ul class="gallery-links">
+            <li><a href="#"><i class="fas fa-heart"></i>Like</a></li>
+            <li><a href="#"><i class="fas fa-share-alt"></i>Share</a></li>
+          </ul>
+        </div>
+
+        <div class="gallery-box box">
+          <img src="images/home/pizza-5.jpg">
+          <ul class="gallery-links">
+            <li><a href="#"><i class="fas fa-heart"></i>Like</a></li>
+            <li><a href="#"><i class="fas fa-share-alt"></i>Share</a></li>
+          </ul>
+        </div>
+
+        <div class="gallery-box box">
+          <img src="images/home/pizza-6.jpg">
+          <ul class="gallery-links">
+            <li><a href="#"><i class="fas fa-heart"></i>Like</a></li>
+            <li><a href="#"><i class="fas fa-share-alt"></i>Share</a></li>
+          </ul>
+        </div>
+
+        <div class="gallery-box box">
+          <img src="images/home/pizza-7.jpg">
+          <ul class="gallery-links">
+            <li><a href="#"><i class="fas fa-heart"></i>Like</a></li>
+            <li><a href="#"><i class="fas fa-share-alt"></i>Share</a></li>
+          </ul>
+        </div>
+
+        <div class="gallery-box box">
+          <img src="images/home/pizza-8.jpg">
+          <ul class="gallery-links">
+            <li><a href="#"><i class="fas fa-heart"></i>Like</a></li>
+            <li><a href="#"><i class="fas fa-share-alt"></i>Share</a></li>
+          </ul>
+        </div>
+
+        <div class="gallery-box box">
+          <img src="images/home/pizza-9.jpg">
+          <ul class="gallery-links">
+            <li><a href="#"><i class="fas fa-heart"></i>Like</a></li>
+            <li><a href="#"><i class="fas fa-share-alt"></i>Share</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="instagram">
+        <a href="#">View more on Instagram</a>
+      </div>
+    </div>
+    </div>
+  </script>
 
   <script id="template-booking-widget" type="text/x-handlebars-template">
     <div class="booking-widget">

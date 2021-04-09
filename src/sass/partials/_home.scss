@@ -1,0 +1,164 @@
+
+.home-wrapper {
+  margin: ($base-size * 3.5) auto;
+  padding: ($base-size * 6) ($base-size * 4);
+  background: $color-light;
+  border-bottom: 1px solid lighten($color-dark, 70%);
+  border-radius: $radius;
+}
+
+//Global
+.box {
+  border-radius: $radius;
+}
+
+//Boxes
+.home-widget {
+  .boxes-wrapper {
+    color: $color-light;
+    text-transform: uppercase;
+    font-family: $font-header;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 6px;
+    grid-row-gap: 6px;
+
+    .top, .bottom {
+      height: 120px;
+    }
+
+    .box-title {
+      @extend .h1;
+      padding: 0;
+      margin: 0;
+    }
+
+    .top {
+      background-color: $color-dark;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      h1.box-title:hover {
+        transform: translateY(-25px);
+        transition: 1s all;
+      }
+
+      a {
+        text-decoration: none;
+        color: $color-light;
+      }
+    }
+
+    .box-right {
+      background-image: url("./../../images/home/pizza-2.jpg");
+    }
+
+    .box-left {
+      background-image: url("./../../images/home/pizza-1.jpg");
+    }
+  }
+
+  .box-bottom {
+    background-color: $color-danger;
+    grid-area: 2 / 1 / 3 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .box-subtitle {
+      @extend .h2;
+      margin: 0;
+      padding-top: 6px;
+
+    }
+  }
+}
+
+/* CAROUSEL */
+
+.carousel-item {
+  width: 100%;
+  display: flex;
+  height: 100%;
+  margin: 10px;
+}
+
+
+/* GALLERY */
+
+.gallery {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 13px;
+  grid-row-gap: 13px;
+  cursor: pointer;
+  margin-top: 100px;
+
+  .gallery-box {
+    position: relative;
+
+    img {
+      height: 200px;
+      width: 200px;
+      object-fit: cover;
+    }
+    .gallery-links {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: 0 auto;
+      padding: 0;
+      transform: translate(-50%, -50%);
+      visibility: hidden;
+
+      li {
+
+        display: inline;
+        font-size: 0;
+
+        i {
+          font-size: 26px;
+        }
+
+        .fa-heart {
+          padding: 10px;
+          color: $color-danger;
+        }
+
+        .fa-share-alt {
+          padding: 10px;
+          color: $color-light;
+        }
+      }
+    }
+  }
+
+  .gallery-box:hover {
+    img {
+      opacity: 0.7;
+      transition: 1s all;
+    }
+
+    .gallery-links{
+      visibility: visible;
+    }
+  }
+}
+
+.instagram {
+
+  text-align: center;
+  padding: 10px auto;
+  margin: 20px auto;
+
+  a {
+    color: $color-main;
+    text-decoration: none;
+  }
+}
+
