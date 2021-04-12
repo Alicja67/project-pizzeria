@@ -68,11 +68,11 @@ export const select = {
     tablesWrapper: '.floor-plan',
     selected: '.selected',
     form: '.booking-form',
-    startersWrapper: '.starters-wrapper',
-
+    starters: 'input[type="checkbox"]',
   },
   nav: {
-    links: '.main-nav a',
+    links: '.main-nav a, .boxes-wrapper a',
+    homeLinks: '.boxes-wrapper a',
   },
 };
 
