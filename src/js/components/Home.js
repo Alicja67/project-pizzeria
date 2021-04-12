@@ -23,7 +23,6 @@ class Home {
     thisHome.dom.wrapper = element;
     thisHome.dom.wrapper.innerHTML = generatedHTML;
     thisHome.dom.links = thisHome.dom.wrapper.querySelectorAll(select.nav.homeLinks);
-    // console.log('thisHome.dom.links', thisHome.dom.links);
   }
 
   // initHomeLinks(){
