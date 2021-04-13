@@ -188,3 +188,39 @@
   }
 }
 
+@media (max-width: 700px) {
+  header .container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .cart {
+    position: relative;
+  }
+
+  .home-widget {
+    .boxes-wrapper {
+      display: block;
+
+      .top, .bottom {
+        margin-bottom: 13px;
+        width: 100%;
+      }
+    }
+  }
+
+  .gallery {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .gallery-box img {
+      width: 250px;
+    }
+  }
+
+  .instagram {
+    text-align: center;
+  }
+}
