@@ -15,21 +15,15 @@ class Product {
     thisProduct.initOrderForm();
     thisProduct.initAmountWidget();
     thisProduct.processOrder();
-
-    //   console.log('new Product:', thisProduct);
-    //   console.log('thisProduct.element', thisProduct.element);
-    // console.log('thisProduct.data', thisProduct.data);
   }
 
   renderInMenu() {
     const thisProduct = this;
+
     const generatedHTML = templates.menuProduct(thisProduct.data);
-    // console.log('generatedHTML', generatedHTML);
     thisProduct.element = utils.createDOMFromHTML(generatedHTML);
     const menuContainer = document.querySelector(select.containerOf.menu);
-    // console.log('menuContainer', menuContainer);
     menuContainer.appendChild(thisProduct.element);
-    // console.log('thisProduct.element', thisProduct.element);
   }
 
   getElements() {
@@ -41,16 +35,11 @@ class Product {
     thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
     thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
     thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
-    //   console.log('thisProduct.form', thisProduct.form);
-    //   console.log('thisProduct.formInputs', thisProduct.formInputs);
-    //   console.log('thisProduct.cartButton', thisProduct.cartButton);
-    //   console.log('thisProduct.priceElem', thisProduct.priceElem);
-    // console.log('thisProduct.amountWidgetElem', thisProduct.amountWidgetElem);
   }
 
   initAccordion() {
     const thisProduct = this;
-    // thisProduct.clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+
     thisProduct.accordionTrigger.addEventListener('click', function (event) {
       event.preventDefault();
       const activeProduct = document.querySelector('.product.active');
@@ -63,7 +52,6 @@ class Product {
 
   initOrderForm() {
     const thisProduct = this;
-    // console.log('initOrderForm', thisProduct.initOrderForm);
 
     thisProduct.form.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -88,7 +76,6 @@ class Product {
     const thisProduct = this;
 
     thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-    // console.log('thisProduct.amountWidgetElem', thisProduct.amountWidgetElem);
     thisProduct.amountWidgetElem.addEventListener('updated', function () {
       thisProduct.processOrder();
     });
@@ -96,21 +83,16 @@ class Product {
 
   processOrder() {
     const thisProduct = this;
-    // console.log('processOrder', thisProduct.processOrder);
 
     const formData = utils.serializeFormToObject(thisProduct.form);
-    // console.log('formData', formData);
 
     let price = thisProduct.data.price;
 
     for (let paramId in thisProduct.data.params) {
-      // debugger;
       const param = thisProduct.data.params[paramId];
-      // console.log('paramId, param', paramId, param);
 
       for (let optionId in param.options) {
         const option = param.options[optionId];
-        // console.log('optionId, option', optionId, option);
         const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
         if (optionSelected) {
           if (!option.default) {
@@ -148,8 +130,6 @@ class Product {
       params: thisProduct.prepareCartProductParams(),
     };
 
-    // console.log('productSummary', productSummary);
-
     return productSummary;
   }
 
@@ -157,12 +137,10 @@ class Product {
     const thisProduct = this;
 
     const formData = utils.serializeFormToObject(thisProduct.form);
-    // console.log('formData', formData);
     const params = {};
 
     for (let paramId in thisProduct.data.params) {
       const param = thisProduct.data.params[paramId];
-      // console.log('param', param);
 
       params[paramId] = {
         label: param.label,
@@ -170,26 +148,20 @@ class Product {
       };
 
       for (let optionId in param.options) {
-        // console.log('optionIn', optionId);
-        // console.log('param.options', param.options);
         const option = param.options[optionId];
-        // console.log('option', option);
         const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
 
         if (optionSelected) {
           params[paramId].options[optionId] = option.label;
-          // console.log('option.label', option.label);
         }
       }
     }
-    // console.log('params', params);
+
     return params;
   }
 
   addToCart() {
     const thisProduct = this;
-
-    // app.cart.add(thisProduct.prepareCartProduct());
 
     const event = new CustomEvent('add-to-cart', {
       bubbles: true,

@@ -2,7 +2,7 @@ import {
   select,
   templates
 } from '../settings.js';
-// import app from '../app.js';
+import {app} from '../app.js';
 
 class Home {
   constructor(element) {
@@ -11,7 +11,7 @@ class Home {
     thisHome.element = element;
 
     thisHome.render(element);
-    // thisHome.initHomeLinks();
+    thisHome.initHomeLinks();
   }
 
   render(element) {
@@ -25,11 +25,11 @@ class Home {
     thisHome.dom.links = thisHome.dom.wrapper.querySelectorAll(select.nav.homeLinks);
   }
 
-  // initHomeLinks(){
-  //   const thisHome = this;
+  initHomeLinks(){
+    const thisHome = this;
 
-  //   app.initLinks(thisHome.dom.links);
-  // }
+    app.initLinks(thisHome.dom.links);
+  }
 }
 
 export default Home;

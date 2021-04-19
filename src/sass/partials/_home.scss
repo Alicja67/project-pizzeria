@@ -26,7 +26,6 @@
       border-radius: $radius;
     }
 
-
     .top {
       width: 300px;
       background-size: cover;
@@ -123,59 +122,50 @@
   grid-row-gap: 8px;
   cursor: pointer;
   margin-top: 100px;
+}
 
-  .gallery-box {
-    position: relative;
+.gallery-box {
+  position: relative;
+}
 
-    img {
-      height: 193px;
-      width: 193px;
-      object-fit: cover;
-      border-radius: $radius;
-      transition: 1 all;
-    }
+.gallery-box img {
+  height: 193px;
+  width: 193px;
+  object-fit: cover;
+  border-radius: $radius;
+  transition: 1s all;
+}
 
-    .gallery-links {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: 0 auto;
-      padding: 0;
-      transform: translate(-50%, -50%);
-      visibility: hidden;
-    }
-  }
+.gallery-links {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0 auto;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+}
 
-  .gallery-links {
-    li {
-      display: inline;
-      font-size: 0;
+.gallery-links li {
+  display: inline;
+  font-size: 0;
+}
 
-      i {
-        font-size: 26px;
-      }
+.gallery-links li i {
+  font-size: 26px;
+}
 
-      .fa-heart {
-        padding: 10px;
-        color: $color-danger;
-      }
+.gallery-links .fa-heart, .gallery-links .fa-share-alt {
+  padding: 10px;
+  color: $color-danger;
+}
 
-      .fa-share-alt {
-        padding: 10px;
-        color: $color-light;
-      }
-    }
-  }
+.gallery-box:hover img {
+    opacity: 0.7;
+}
 
-  .gallery-box:hover {
-    img {
-      opacity: 0.5;
-    }
-
-    .gallery-links {
-      visibility: visible;
-    }
-  }
+.gallery-box:hover .gallery-links {
+  visibility: visible;
 }
 
 .instagram {

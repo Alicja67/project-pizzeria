@@ -14,7 +14,6 @@ class Booking {
   constructor(element) {
     const thisBooking = this;
 
-    // console.log('element', element);
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
@@ -43,7 +42,6 @@ class Booking {
         startDataParam,
       ],
     };
-    // console.log('params', params);
 
     const urls = {
       booking: settings.db.url + '/' + settings.db.booking +
@@ -53,7 +51,6 @@ class Booking {
       eventsRepeat: settings.db.url + '/' + settings.db.event +
         '?' + params.eventsRepeat.join('&'),
     };
-    // console.log('url', urls);
 
     Promise.all([
       fetch(urls.booking),
@@ -71,9 +68,6 @@ class Booking {
         ]);
       })
       .then(function ([bookings, eventsCurrent, eventsRepeat]) {
-        //   console.log(bookings);
-        //   console.log(eventsCurrent);
-        // console.log(eventsRepeat);
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   }
@@ -102,7 +96,6 @@ class Booking {
       }
     }
     thisBooking.updateDOM();
-    // console.log('thisBooking.booked', thisBooking.booked);
   }
 
   makeBooked(date, hour, duration, table) {
@@ -175,12 +168,10 @@ class Booking {
 
       event.target.classList.add('selected');
       thisBooking.selectedTable.push(parseInt(choosenTable));
-
     } else if (tableSelected) {
       event.target.classList.remove('selected');
       thisBooking.selectedTable.pop(choosenTable);
     }
-    // console.log('thisBooking.selectedTable', thisBooking.selectedTable);
   }
 
   removeSelectedTable() {
@@ -190,7 +181,6 @@ class Booking {
     for (let selected of allSelected) {
       selected.classList.remove('selected');
       const indexSelected = thisBooking.selectedTable.indexOf(selected);
-      // console.log('selected', selected);
       thisBooking.selectedTable.splice(indexSelected);
     }
   }
@@ -219,14 +209,11 @@ class Booking {
 
     thisBooking.amountWidgetPeople = new AmountWidget(thisBooking.dom.peopleAmount);
     thisBooking.amountWidgetHours = new AmountWidget(thisBooking.dom.hoursAmount);
-
-    // console.log('thisBooking.amountWidgetPeople', thisBooking.amountWidgetHours);
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
     thisBooking.dom.wrapper.addEventListener('updated', function () {
       thisBooking.updateDOM();
-
     });
 
     thisBooking.dom.tablesWrapper.addEventListener('click', function (event) {
@@ -237,7 +224,6 @@ class Booking {
     thisBooking.dom.form.addEventListener('submit', function (event) {
       event.preventDefault();
       thisBooking.sendOrder();
-      // console.log('event', event);
     });
   }
 
@@ -245,7 +231,6 @@ class Booking {
     const thisBooking = this;
 
     const url = settings.db.url + '/' + settings.db.booking;
-
 
     const payload = {
       date: thisBooking.datePicker.value,
@@ -281,10 +266,6 @@ class Booking {
         thisBooking.makeBooked(parsedResponse.date, parsedResponse.hour, parsedResponse.duration, parsedResponse.table);
         thisBooking.updateDOM();
       });
-
-
-    // console.log('thisBooking.booked', thisBooking.booked);
-
   }
 }
 export default Booking;

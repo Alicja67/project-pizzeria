@@ -8,7 +8,7 @@ import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
 import Home from './components/Home.js';
 
-const app = {
+export const app = {
   initHome: function () {
     const thisApp = this;
 
@@ -20,8 +20,6 @@ const app = {
     const thisApp = this;
 
     const bookingElem = document.querySelector(select.containerOf.booking);
-    // console.log('bookingElem', bookingElem);
-
     thisApp.booking = new Booking(bookingElem);
   },
 
@@ -41,6 +39,7 @@ const app = {
         break;
       }
     }
+
     thisApp.activatePage(pageMatchingHash);
 
     thisApp.initLinks(thisApp.navLinks);
@@ -52,13 +51,9 @@ const app = {
     for (let link of links) {
       link.addEventListener('click', function (event) {
         const clickedElement = this;
-        // console.log('event', event);
         event.preventDefault();
 
-        /* get page id from href attribute*/
         const id = clickedElement.getAttribute('href').replace('#', '');
-        // console.log('id', id);
-        /* run thisApp.activePage with that id*/
         thisApp.activatePage(id);
         window.location.hash = '#/' + id;
       });
@@ -68,25 +63,20 @@ const app = {
   activatePage: function (pageId) {
     const thisApp = this;
 
-    // add class "active" to marching pages, remove from non-marching
     for (let page of thisApp.pages) {
       page.classList.toggle(classNames.pages.active, page.id == pageId);
     }
 
-    // add class "active" to marching links, remove from non-marching
     for (let link of thisApp.navLinks) {
       link.classList.toggle(
         classNames.nav.active,
         link.getAttribute('href') == '#' + pageId
       );
     }
-
   },
 
   initMenu: function () {
     const thisApp = this;
-
-    // console.log('thisApp.data:', thisApp.data);
 
     for (let productData in thisApp.data.products) {
       new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);
@@ -99,25 +89,15 @@ const app = {
     thisApp.data = {};
 
     const url = settings.db.url + '/' + settings.db.product;
-    // console.log('url: ', url);
 
     fetch(url)
       .then(function (rawResponse) {
         return rawResponse.json();
       })
       .then(function (parsedResponse) {
-        // console.log('parsedResponse', parsedResponse);
-
-        /* save parsedResponse as thisApp.data.products */
-
         thisApp.data.products = parsedResponse;
-
-        /* execute initMenu method */
-
         app.initMenu();
       });
-
-    // console.log('thisApp.data', JSON.stringify(thisApp.data));
   },
 
   initCart: function () {
@@ -125,7 +105,6 @@ const app = {
 
     const cartElem = document.querySelector(select.containerOf.cart);
     thisApp.cart = new Cart(cartElem);
-    // console.log('cartElem', cartElem);
 
     thisApp.productList = document.querySelector(select.containerOf.menu);
 
@@ -146,5 +125,3 @@ const app = {
 };
 
 app.init();
-
-export default app;

@@ -71,7 +71,7 @@ export const select = {
     starters: 'input[type="checkbox"]',
   },
   nav: {
-    links: '.main-nav a, .boxes-wrapper a',
+    links: '.main-nav a',
     homeLinks: '.boxes-wrapper a',
   },
 };
